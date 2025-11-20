@@ -1,0 +1,4 @@
+DELETE request for id: 4
+Delete result: {"changes":1,"lastInsertRowid":0}
+DELETE request for ID: 10
+DELETE error: FOREIGN KEY constraint failed
