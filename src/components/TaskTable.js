@@ -15,7 +15,7 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                             <th className="px-4 py-3 text-center">Confirmed</th>
                             <th className="px-4 py-3 w-1/3">Description</th>
                             <th className="px-4 py-3">Status</th>
-                            <th className="px-4 py-3">Note</th>
+                            <th className="px-4 py-3">Remarks</th>
                             <th className="px-4 py-3 text-right">Actions</th>
                         </tr>
                     </thead>
@@ -65,7 +65,7 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                             {task.status}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3 text-gray-500 truncate max-w-xs">{task.note}</td>
+                                    <td className="px-4 py-3 text-gray-500 truncate max-w-xs">{task.remarks}</td>
                                     <td className="px-4 py-3 text-right">
                                         <div className="flex justify-end gap-2">
                                             <button

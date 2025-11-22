@@ -10,7 +10,7 @@ export default function TaskModal({ task, onClose, onSave }) {
         is_confirmed: false,
         description: '',
         status: 'Pending',
-        note: '',
+        remarks: '',
     });
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function TaskModal({ task, onClose, onSave }) {
                 is_confirmed: !!task.is_confirmed,
                 description: task.description || '',
                 status: task.status || 'Pending',
-                note: task.note || '',
+                remarks: task.remarks || '',
             });
         }
     }, [task]);
@@ -128,11 +128,11 @@ export default function TaskModal({ task, onClose, onSave }) {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Note</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Remarks</label>
                             <input
                                 type="text"
-                                value={formData.note}
-                                onChange={(e) => setFormData({ ...formData, note: e.target.value })}
+                                value={formData.remarks}
+                                onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
                                 className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
                             />
                         </div>

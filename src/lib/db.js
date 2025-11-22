@@ -17,7 +17,7 @@ const initSql = `
     is_confirmed INTEGER DEFAULT 0,
     description TEXT,
     status TEXT,
-    note TEXT,
+    remarks TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP
   );

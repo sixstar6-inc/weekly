@@ -58,14 +58,26 @@ export default function Home() {
         const method = selectedTask ? 'PUT' : 'POST';
         const url = selectedTask ? `/api/tasks/${selectedTask.id}` : '/api/tasks';
 
-        await fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(taskData),
-        });
+        try {
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(taskData),
+            });
 
-        setIsTaskModalOpen(false);
-        fetchTasks();
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error('Failed to save task:', errorData);
+                // Optionally, show an error message to the user
+                return;
+            }
+
+            setIsTaskModalOpen(false);
+            fetchTasks();
+        } catch (error) {
+            console.error('An unexpected error occurred:', error);
+            // Optionally, show an error message to the user
+        }
     };
 
     const handleDeleteClick = (task) => {
