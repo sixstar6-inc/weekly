@@ -29,6 +29,12 @@ const initSql = `
     changed_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(task_id) REFERENCES tasks(id)
   );
+
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE,
+    password TEXT
+  );
 `;
 
 // Async Database Adapter
@@ -79,10 +85,10 @@ const db = {
     await db.init();
     if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
       const result = await dbInstance.execute({ sql, args: params });
-      return { lastInsertRowid: result.lastInsertRowid };
+      return { lastInsertRowid: Number(result.lastInsertRowid) };
     } else {
       const info = dbInstance.prepare(sql).run(...params);
-      return { lastInsertRowid: info.lastInsertRowid };
+      return { lastInsertRowid: Number(info.lastInsertRowid) };
     }
   },
 

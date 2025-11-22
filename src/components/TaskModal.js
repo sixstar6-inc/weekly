@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
-export default function TaskModal({ task, onClose, onSave }) {
+export default function TaskModal({ task, onClose, onSave, isLoading }) {
     const [formData, setFormData] = useState({
         system: '',
         department: '',
@@ -40,7 +40,7 @@ export default function TaskModal({ task, onClose, onSave }) {
                     <h2 className="text-lg font-semibold text-gray-900">
                         {task ? 'Edit Task' : 'New Task'}
                     </h2>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                    <button onClick={onClose} disabled={isLoading} className="text-gray-400 hover:text-gray-600 disabled:opacity-50">
                         <X size={20} />
                     </button>
                 </div>
@@ -54,7 +54,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                 required
                                 value={formData.system}
                                 onChange={(e) => setFormData({ ...formData, system: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
                         <div>
@@ -64,7 +65,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                 required
                                 value={formData.department}
                                 onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
                     </div>
@@ -76,7 +78,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                 type="text"
                                 value={formData.itsm_number}
                                 onChange={(e) => setFormData({ ...formData, itsm_number: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
                         <div>
@@ -86,7 +89,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                 required
                                 value={formData.deployment_date}
                                 onChange={(e) => setFormData({ ...formData, deployment_date: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
                         <div className="flex items-center pt-6">
@@ -95,7 +99,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                     type="checkbox"
                                     checked={formData.is_confirmed}
                                     onChange={(e) => setFormData({ ...formData, is_confirmed: e.target.checked })}
-                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                                    disabled={isLoading}
+                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 disabled:opacity-50"
                                 />
                                 <span className="text-sm font-medium text-gray-700">Confirmed</span>
                             </label>
@@ -109,7 +114,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                             rows={3}
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                            disabled={isLoading}
+                            className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                         />
                     </div>
 
@@ -119,7 +125,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                             <select
                                 value={formData.status}
                                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             >
                                 <option value="Pending">Pending</option>
                                 <option value="In Progress">In Progress</option>
@@ -133,7 +140,8 @@ export default function TaskModal({ task, onClose, onSave }) {
                                 type="text"
                                 value={formData.remarks}
                                 onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
                     </div>
@@ -142,15 +150,24 @@ export default function TaskModal({ task, onClose, onSave }) {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                            disabled={isLoading}
+                            className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            disabled={isLoading}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                         >
-                            Save Task
+                            {isLoading ? (
+                                <>
+                                    <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                    Saving...
+                                </>
+                            ) : (
+                                'Save Task'
+                            )}
                         </button>
                     </div>
                 </form>
