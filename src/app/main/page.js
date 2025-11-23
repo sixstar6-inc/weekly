@@ -132,7 +132,7 @@ export default function Home() {
             <div className="max-w-7xl mx-auto space-y-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Weekly Task Manager</h1>
-                    <div className="flex flex-wrap gap-3 items-center w-full md:w-auto">
+                    <div className="flex flex-wrap gap-3 items-center w-full md:w-auto justify-end">
                         {user && (
                             <span className="text-gray-700 font-medium mr-2">
                                 {user.username}
@@ -147,17 +147,17 @@ export default function Home() {
                         </button>
                         <button
                             onClick={handleExport}
-                            className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                            className="hidden md:flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
                         >
                             <Download size={20} />
                             Excel
                         </button>
                         <button
                             onClick={handleLogout}
-                            className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                            className="flex items-center gap-2 bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                            title="Logout"
                         >
                             <LogOut size={20} />
-                            Logout
                         </button>
                     </div>
                 </div>
