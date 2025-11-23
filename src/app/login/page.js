@@ -33,14 +33,22 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="flex items-center justify-center min-h-screen bg-gray-50">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-                <h1 className="text-2xl font-bold text-center text-gray-900">Login</h1>
+        <main className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+                <div className="text-center space-y-2">
+                    <h2 className="text-gray-500 font-medium tracking-wide uppercase text-sm">Welcome to</h2>
+                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Weekly Task Management</h1>
+                </div>
+
+                <div className="pt-4">
+                    <h2 className="text-xl font-semibold text-center text-gray-800">Login</h2>
+                </div>
+
                 <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div>
+                    <div className="space-y-2">
                         <label
                             htmlFor="username"
-                            className="text-sm font-medium text-gray-700"
+                            className="text-sm font-medium text-gray-700 block"
                         >
                             Username
                         </label>
@@ -51,13 +59,14 @@ export default function LoginPage() {
                             required
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                            placeholder="Enter your username"
                         />
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <label
                             htmlFor="password"
-                            className="text-sm font-medium text-gray-700"
+                            className="text-sm font-medium text-gray-700 block"
                         >
                             Password
                         </label>
@@ -68,18 +77,23 @@ export default function LoginPage() {
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                            placeholder="Enter your password"
                         />
                     </div>
-                    {error && <p className="text-sm text-red-600">{error}</p>}
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                            Sign in
-                        </button>
-                    </div>
+
+                    {error && (
+                        <div className="p-3 rounded-lg bg-red-50 text-red-600 text-sm text-center font-medium">
+                            {error}
+                        </div>
+                    )}
+
+                    <button
+                        type="submit"
+                        className="w-full px-4 py-3 text-sm font-semibold text-white bg-gray-900 rounded-xl hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors shadow-lg shadow-gray-900/20"
+                    >
+                        Sign in
+                    </button>
                 </form>
             </div>
         </main>
