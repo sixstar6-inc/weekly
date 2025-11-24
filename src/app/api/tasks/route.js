@@ -25,7 +25,7 @@ export async function GET(request) {
         params.push(`%${search}%`);
     }
 
-    query += ' ORDER BY created_at DESC';
+    query += ' ORDER BY deployment_date DESC, created_at DESC';
 
     try {
         const tasks = await db.all(query, params);

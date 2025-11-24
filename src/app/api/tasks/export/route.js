@@ -35,7 +35,6 @@ export async function GET(request) {
         const worksheet = workbook.addWorksheet('Weekly Tasks');
 
         worksheet.columns = [
-            { header: 'ID', key: 'id', width: 10 },
             { header: 'System', key: 'system', width: 15 },
             { header: 'Department', key: 'department', width: 15 },
             { header: 'ITSM #', key: 'itsm_number', width: 15 },
@@ -44,8 +43,6 @@ export async function GET(request) {
             { header: 'Description', key: 'description', width: 30 },
             { header: 'Status', key: 'status', width: 15 },
             { header: 'Note', key: 'note', width: 20 },
-            { header: 'Created At', key: 'created_at', width: 20 },
-            { header: 'Updated At', key: 'updated_at', width: 20 },
         ];
 
         tasks.forEach((task) => {

@@ -128,69 +128,82 @@ export default function Home() {
     };
 
     return (
-        <main className="min-h-screen bg-gray-50 p-4 md:p-8">
-            <div className="max-w-7xl mx-auto space-y-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Weekly Task Manager</h1>
-                    <div className="flex flex-wrap gap-3 items-center w-full md:w-auto justify-end">
+        <main className="min-h-screen bg-slate-50">
+            {/* Header */}
+            <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <h1 className="text-xl font-bold text-slate-900 tracking-tight">Weekly Task Manager</h1>
+                    </div>
+
+                    <div className="flex items-center gap-4">
                         {user && (
-                            <span className="text-gray-700 font-medium mr-2">
-                                {user.username}
-                            </span>
+                            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-full border border-slate-100">
+                                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                <span className="text-sm font-medium text-slate-700">
+                                    {user.username}
+                                </span>
+                            </div>
                         )}
-                        <button
-                            onClick={handleCreate}
-                            className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-                        >
-                            <Plus size={20} />
-                            New
-                        </button>
-                        <button
-                            onClick={handleExport}
-                            className="hidden md:flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-                        >
-                            <Download size={20} />
-                            Excel
-                        </button>
-                        <button
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-                            title="Logout"
-                        >
-                            <LogOut size={20} />
-                        </button>
+                        <div className="h-6 w-px bg-slate-200 hidden md:block"></div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={handleCreate}
+                                className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-all shadow-sm hover:shadow text-sm font-medium"
+                            >
+                                <Plus size={18} />
+                                New
+                            </button>
+                            <button
+                                onClick={handleExport}
+                                className="hidden md:flex items-center gap-2 bg-white text-slate-700 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50 transition-all shadow-sm hover:shadow text-sm font-medium"
+                            >
+                                <Download size={18} />
+                                Excel
+                            </button>
+                            <button
+                                onClick={handleLogout}
+                                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                                title="Logout"
+                            >
+                                <LogOut size={20} />
+                            </button>
+                        </div>
                     </div>
                 </div>
+            </header>
 
-                <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 items-end">
-                    <div className="space-y-1 w-full md:w-auto">
-                        <label className="text-sm font-medium text-gray-700">Start Date</label>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+                {/* Filters */}
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-5 items-end">
+                    <div className="space-y-1.5 w-full md:w-auto">
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Start Date</label>
                         <input
                             type="date"
                             value={filters.startDate}
                             onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-                            className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2 border text-gray-900"
+                            className="block w-full rounded-lg border-slate-200 shadow-sm focus:border-slate-900 focus:ring-slate-900 px-3 py-2 border text-slate-900 text-sm"
                         />
                     </div>
-                    <div className="space-y-1 w-full md:w-auto">
-                        <label className="text-sm font-medium text-gray-700">End Date</label>
+                    <div className="space-y-1.5 w-full md:w-auto">
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">End Date</label>
                         <input
                             type="date"
                             value={filters.endDate}
                             onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
-                            className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2 border text-gray-900"
+                            className="block w-full rounded-lg border-slate-200 shadow-sm focus:border-slate-900 focus:ring-slate-900 px-3 py-2 border text-slate-900 text-sm"
                         />
                     </div>
-                    <div className="space-y-1 w-full md:flex-1">
-                        <label className="text-sm font-medium text-gray-700">Search Description</label>
+                    <div className="space-y-1.5 w-full md:flex-1">
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Search</label>
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                             <input
                                 type="text"
-                                placeholder="Search tasks..."
+                                placeholder="Search by description..."
                                 value={filters.search}
                                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                                className="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2 border text-gray-900"
+                                className="block w-full pl-10 rounded-lg border-slate-200 shadow-sm focus:border-slate-900 focus:ring-slate-900 px-3 py-2 border text-slate-900 text-sm"
                             />
                         </div>
                     </div>
