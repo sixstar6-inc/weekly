@@ -47,13 +47,14 @@ export async function POST(request) {
             description,
             status,
             remarks,
+            work_duration
         } = body;
 
         const query = `
       INSERT INTO tasks (
         system, department, itsm_number, deployment_date, is_confirmed,
-        description, status, remarks
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        description, status, remarks, work_duration
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
         const info = await db.run(query, [
@@ -64,7 +65,8 @@ export async function POST(request) {
             is_confirmed ? 1 : 0,
             description,
             status,
-            remarks
+            remarks,
+            work_duration
         ]);
 
         return NextResponse.json({ id: info.lastInsertRowid, ...body });

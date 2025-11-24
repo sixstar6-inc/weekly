@@ -32,18 +32,19 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                         <td className="px-6 py-4 font-medium text-slate-900">{task.system}</td>
                                         <td className="px-6 py-4 text-slate-600">{task.department}</td>
                                         <td className="px-6 py-4 text-slate-600">{task.deployment_date}</td>
-                                        <td className="px-6 py-4 text-center">
+                                        <td className="px-6 py-4">
                                             <span
                                                 className={clsx(
                                                     'px-2.5 py-1 rounded-full text-xs font-medium border',
                                                     task.is_confirmed
-                                                        ? 'bg-green-50 text-green-700 border-green-100'
-                                                        : 'bg-slate-50 text-slate-600 border-slate-100'
+                                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                                        : 'bg-slate-50 text-slate-600 border-slate-200'
                                                 )}
                                             >
-                                                {task.is_confirmed ? 'Yes' : 'No'}
+                                                {task.is_confirmed ? 'Confirmed' : 'Not Confirmed'}
                                             </span>
                                         </td>
+
                                         <td
                                             className="px-6 py-4 text-slate-900 cursor-pointer hover:text-blue-600 font-medium"
                                             onClick={() => onEdit(task)}
@@ -151,10 +152,14 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                 <p className="text-slate-900 font-semibold text-lg leading-snug line-clamp-2">{task.description}</p>
                             </div>
 
-                            <div className="grid grid-cols-1 gap-3 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <div className="grid grid-cols-2 gap-3 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100">
                                 <div className="flex flex-col">
                                     <span className="text-xs text-slate-400 uppercase tracking-wider font-medium">Date</span>
                                     <span className="text-slate-700">{task.deployment_date}</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xs text-slate-400 uppercase tracking-wider font-medium">Work Duration</span>
+                                    <span className="text-slate-700">{task.work_duration}</span>
                                 </div>
                             </div>
 
@@ -185,6 +190,25 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                 >
                                     {task.is_confirmed ? 'Confirmed' : 'Not Confirmed'}
                                 </span>
+                            </div>
+                            <div className="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
+                                <div>
+                                    <div className="text-xs font-medium text-slate-500 mb-1">Work Duration</div>
+                                    <div className="text-sm text-slate-700">{task.work_duration || '-'}</div>
+                                </div>
+                                <div>
+                                    <div className="text-xs font-medium text-slate-500 mb-1">Status</div>
+                                    <span
+                                        className={clsx(
+                                            'inline-flex items-center px-2 py-1 rounded text-xs font-medium',
+                                            task.status === 'Done'
+                                                ? 'bg-blue-50 text-blue-700'
+                                                : 'bg-slate-100 text-slate-600'
+                                        )}
+                                    >
+                                        {task.status}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     ))

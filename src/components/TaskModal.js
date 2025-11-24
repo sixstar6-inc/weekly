@@ -11,6 +11,7 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
         description: '',
         status: 'Pending',
         remarks: '',
+        work_duration: '',
     });
 
     useEffect(() => {
@@ -24,6 +25,7 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
                 description: task.description || '',
                 status: task.status || 'Pending',
                 remarks: task.remarks || '',
+                work_duration: task.work_duration || '',
             });
         }
     }, [task]);
@@ -70,6 +72,20 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
                             />
                         </div>
                     </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Work Duration</label>
+                        <input
+                            type="text"
+                            value={formData.work_duration}
+                            onChange={(e) => setFormData({ ...formData, work_duration: e.target.value })}
+                            disabled={isLoading}
+                            placeholder="e.g. 2h, 30m"
+                            className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                        />
+                    </div>
+
+
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>

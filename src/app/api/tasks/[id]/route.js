@@ -14,6 +14,7 @@ export async function PUT(request, { params }) {
             description,
             status,
             remarks,
+            work_duration,
         } = body;
 
         // Get current task state
@@ -34,6 +35,7 @@ export async function PUT(request, { params }) {
             'description',
             'status',
             'remarks',
+            'work_duration',
         ];
 
         fields.forEach((field) => {
@@ -53,7 +55,7 @@ export async function PUT(request, { params }) {
         const updateSql = `
       UPDATE tasks SET
         system = ?, department = ?, itsm_number = ?, deployment_date = ?,
-        is_confirmed = ?, description = ?, status = ?, remarks = ?,
+        is_confirmed = ?, description = ?, status = ?, remarks = ?, work_duration = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
     `;
@@ -68,6 +70,7 @@ export async function PUT(request, { params }) {
                 description,
                 status,
                 remarks,
+                work_duration,
                 id
             ]);
 

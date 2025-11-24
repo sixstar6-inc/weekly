@@ -42,6 +42,7 @@ export async function GET(request) {
             { header: 'Confirmed', key: 'is_confirmed', width: 10 },
             { header: 'Description', key: 'description', width: 30 },
             { header: 'Status', key: 'status', width: 15 },
+            { header: 'Work Duration', key: 'work_duration', width: 15 },
             { header: 'Note', key: 'note', width: 20 },
         ];
 

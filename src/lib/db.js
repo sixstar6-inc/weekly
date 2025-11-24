@@ -18,6 +18,7 @@ const initSql = `
     description TEXT,
     status TEXT,
     remarks TEXT,
+    work_duration TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP
   );
