@@ -15,7 +15,7 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                 <th className="px-6 py-4">Date</th>
                                 <th className="px-6 py-4 text-center">Confirmed</th>
                                 <th className="px-6 py-4 w-1/3">Description</th>
-                                <th className="px-6 py-4">Status</th>
+                                <th className="px-2 py-4">Status</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
@@ -29,9 +29,9 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                             ) : (
                                 tasks.map((task) => (
                                     <tr key={task.id} className="hover:bg-slate-50/80 transition-colors group">
-                                        <td className="px-6 py-4 font-medium text-slate-900">{task.system}</td>
-                                        <td className="px-6 py-4 text-slate-600">{task.department}</td>
-                                        <td className="px-6 py-4 text-slate-600">{task.deployment_date}</td>
+                                        <td className="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">{task.system}</td>
+                                        <td className="px-6 py-4 text-slate-600 whitespace-nowrap">{task.department}</td>
+                                        <td className="px-6 py-4 text-slate-600 whitespace-nowrap">{task.deployment_date}</td>
                                         <td className="px-6 py-4">
                                             <span
                                                 className={clsx(
@@ -54,7 +54,7 @@ export default function TaskTable({ tasks, onEdit, onHistory, onDelete }) {
                                                 ? `${task.description.substring(0, 30)}...`
                                                 : task.description}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-2 py-4">
                                             <span
                                                 className={clsx(
                                                     'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border',

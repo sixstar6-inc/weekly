@@ -13,10 +13,14 @@ export default function Home() {
     const [filters, setFilters] = useState({
         startDate: (() => {
             const d = new Date();
-            d.setMonth(d.getMonth() - 1);
+            d.setDate(d.getDate() - 7);
             return d.toLocaleDateString('en-CA');
         })(),
-        endDate: new Date().toLocaleDateString('en-CA'),
+        endDate: (() => {
+            const d = new Date();
+            d.setMonth(d.getMonth() + 1);
+            return d.toLocaleDateString('en-CA');
+        })(),
         search: ''
     });
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
@@ -131,7 +135,7 @@ export default function Home() {
         <main className="min-h-screen bg-slate-50">
             {/* Header */}
             <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <h1 className="text-xl font-bold text-slate-900 tracking-tight">Weekly Task Manager</h1>
                     </div>
@@ -173,7 +177,7 @@ export default function Home() {
                 </div>
             </header>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
                 {/* Filters */}
                 <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-5 items-end">
                     <div className="space-y-1.5 w-full md:w-auto">
