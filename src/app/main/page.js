@@ -21,7 +21,8 @@ export default function Home() {
             d.setMonth(d.getMonth() + 6);
             return d.toLocaleDateString('en-CA');
         })(),
-        search: ''
+        search: '',
+        status: ''
     });
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
     const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
@@ -37,6 +38,7 @@ export default function Home() {
         if (filters.startDate) params.append('startDate', filters.startDate);
         if (filters.endDate) params.append('endDate', filters.endDate);
         if (filters.search) params.append('search', filters.search);
+        if (filters.status) params.append('status', filters.status);
 
         const res = await fetch(`/api/tasks?${params}`, { cache: 'no-store' });
         const data = await res.json();
@@ -123,6 +125,7 @@ export default function Home() {
         if (filters.startDate) params.append('startDate', filters.startDate);
         if (filters.endDate) params.append('endDate', filters.endDate);
         if (filters.search) params.append('search', filters.search);
+        if (filters.status) params.append('status', filters.status);
         window.location.href = `/api/tasks/export?${params}`;
     };
 
@@ -197,6 +200,20 @@ export default function Home() {
                             onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
                             className="block w-full rounded-lg border-slate-200 shadow-sm focus:border-slate-900 focus:ring-slate-900 px-3 py-2 border text-slate-900 text-sm"
                         />
+                    </div>
+                    <div className="space-y-1.5 w-full md:w-auto">
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</label>
+                        <select
+                            value={filters.status}
+                            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                            className="block w-full rounded-lg border-slate-200 shadow-sm focus:border-slate-900 focus:ring-slate-900 px-3 py-2 border text-slate-900 text-sm"
+                        >
+                            <option value="">All</option>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                            <option value="Hold">Hold</option>
+                        </select>
                     </div>
                     <div className="space-y-1.5 w-full md:flex-1">
                         <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Search</label>

@@ -6,6 +6,7 @@ export async function GET(request) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
     const search = searchParams.get('search');
+    const status = searchParams.get('status');
 
     let query = 'SELECT * FROM tasks WHERE 1=1';
     const params = [];
@@ -24,6 +25,12 @@ export async function GET(request) {
         query += ' AND description LIKE ?';
         params.push(`%${search}%`);
     }
+
+    if (status) {
+        query += ' AND status = ?';
+        params.push(status);
+    }
+
 
     query += ' ORDER BY deployment_date DESC, created_at DESC';
 
