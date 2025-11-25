@@ -13,12 +13,12 @@ export default function Home() {
     const [filters, setFilters] = useState({
         startDate: (() => {
             const d = new Date();
-            d.setDate(d.getDate() - 7);
+            d.setMonth(d.getMonth() - 1);
             return d.toLocaleDateString('en-CA');
         })(),
         endDate: (() => {
             const d = new Date();
-            d.setMonth(d.getMonth() + 1);
+            d.setMonth(d.getMonth() + 6);
             return d.toLocaleDateString('en-CA');
         })(),
         search: ''
