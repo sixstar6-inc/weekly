@@ -37,8 +37,9 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden">
-                <div className="flex justify-between items-center p-4 border-b border-gray-100">
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+                {/* Header - Fixed */}
+                <div className="flex justify-between items-center p-4 border-b border-gray-100 shrink-0">
                     <h2 className="text-lg font-semibold text-gray-900">
                         {task ? 'Edit Task' : 'New Task'}
                     </h2>
@@ -47,69 +48,110 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Body - Scrollable */}
+                <div className="flex-1 overflow-y-auto p-4">
+                    <form id="task-form" onSubmit={handleSubmit} className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">System</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.system}
+                                    onChange={(e) => setFormData({ ...formData, system: e.target.value })}
+                                    disabled={isLoading}
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Department</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.department}
+                                    onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                                    disabled={isLoading}
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">ITSM #</label>
+                                <input
+                                    type="text"
+                                    value={formData.itsm_number}
+                                    onChange={(e) => setFormData({ ...formData, itsm_number: e.target.value })}
+                                    disabled={isLoading}
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Deployment Date</label>
+                                <input
+                                    type="date"
+                                    required
+                                    value={formData.deployment_date}
+                                    onChange={(e) => setFormData({ ...formData, deployment_date: e.target.value })}
+                                    disabled={isLoading}
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Status</label>
+                                <select
+                                    value={formData.status}
+                                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                                    disabled={isLoading}
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                >
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Done">Done</option>
+                                    <option value="Hold">Hold</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-xs font-medium text-gray-700 mb-1">Work Duration</label>
+                                <input
+                                    type="text"
+                                    value={formData.work_duration}
+                                    onChange={(e) => setFormData({ ...formData, work_duration: e.target.value })}
+                                    disabled={isLoading}
+                                    placeholder="e.g. 2h"
+                                    className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                />
+                            </div>
+                        </div>
+
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">System</label>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Description</label>
+                            <textarea
+                                required
+                                rows={3}
+                                value={formData.description}
+                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                disabled={isLoading}
+                                className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Remarks</label>
                             <input
                                 type="text"
-                                required
-                                value={formData.system}
-                                onChange={(e) => setFormData({ ...formData, system: e.target.value })}
+                                value={formData.remarks}
+                                onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
                                 disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
+                                className="w-full rounded-lg border-gray-300 border px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
                             />
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.department}
-                                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                                disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                            />
-                        </div>
-                    </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Work Duration</label>
-                        <input
-                            type="text"
-                            value={formData.work_duration}
-                            onChange={(e) => setFormData({ ...formData, work_duration: e.target.value })}
-                            disabled={isLoading}
-                            placeholder="e.g. 2h, 30m"
-                            className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                        />
-                    </div>
-
-
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">ITSM #</label>
-                            <input
-                                type="text"
-                                value={formData.itsm_number}
-                                onChange={(e) => setFormData({ ...formData, itsm_number: e.target.value })}
-                                disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Deployment Date</label>
-                            <input
-                                type="date"
-                                required
-                                value={formData.deployment_date}
-                                onChange={(e) => setFormData({ ...formData, deployment_date: e.target.value })}
-                                disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                            />
-                        </div>
-                        <div className="flex items-center pt-6">
+                        <div className="flex items-center pt-2">
                             <label className="flex items-center gap-2 cursor-pointer">
                                 <input
                                     type="checkbox"
@@ -121,72 +163,35 @@ export default function TaskModal({ task, onClose, onSave, isLoading }) {
                                 <span className="text-sm font-medium text-gray-700">Confirmed</span>
                             </label>
                         </div>
-                    </div>
+                    </form>
+                </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <textarea
-                            required
-                            rows={3}
-                            value={formData.description}
-                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            disabled={isLoading}
-                            className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <select
-                                value={formData.status}
-                                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                                disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                            >
-                                <option value="Pending">Pending</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Done">Done</option>
-                                <option value="Hold">Hold</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Remarks</label>
-                            <input
-                                type="text"
-                                value={formData.remarks}
-                                onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
-                                disabled={isLoading}
-                                className="w-full rounded-lg border-gray-300 border px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 disabled:bg-gray-100"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-4">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            disabled={isLoading}
-                            className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                        >
-                            {isLoading ? (
-                                <>
-                                    <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                    Saving...
-                                </>
-                            ) : (
-                                'Save Task'
-                            )}
-                        </button>
-                    </div>
-                </form>
+                {/* Footer - Fixed */}
+                <div className="flex justify-end gap-3 p-4 border-t border-gray-100 shrink-0 bg-white">
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        disabled={isLoading}
+                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        form="task-form"
+                        disabled={isLoading}
+                        className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    >
+                        {isLoading ? (
+                            <>
+                                <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                Saving...
+                            </>
+                        ) : (
+                            'Save Task'
+                        )}
+                    </button>
+                </div>
             </div>
         </div>
     );
