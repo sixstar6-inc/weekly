@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Download, Search, LogOut } from 'lucide-react';
+import { Plus, Download, Search, LogOut, BarChart2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import TaskTable from '@/components/TaskTable';
 import TaskModal from '@/components/TaskModal';
@@ -160,6 +160,13 @@ export default function Home() {
                             >
                                 <Plus size={18} />
                                 New
+                            </button>
+                            <button
+                                onClick={() => router.push('/stats')}
+                                className="hidden md:flex items-center gap-2 bg-white text-slate-700 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50 transition-all shadow-sm hover:shadow text-sm font-medium"
+                            >
+                                <BarChart2 size={18} />
+                                Stats
                             </button>
                             <button
                                 onClick={handleExport}
